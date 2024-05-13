@@ -1,5 +1,6 @@
 package ir.irisa.marketplace.ws.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -21,7 +22,7 @@ public class SupplierEntity extends UserEntity{
             message = "Company name should have a length between 2 and 20 characters.")
     private String companyName;
 
-    private boolean isEnable;
+    private boolean enable;
 
     @OneToMany(mappedBy = "supplierEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ProductSupplierEntity> productSupplierList;

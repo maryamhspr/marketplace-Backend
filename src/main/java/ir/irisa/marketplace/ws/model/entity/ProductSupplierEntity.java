@@ -17,11 +17,13 @@ import java.math.BigDecimal;
 @Table(name = "product_supplier")
 public class ProductSupplierEntity implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private SupplierEntity supplierEntity;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
