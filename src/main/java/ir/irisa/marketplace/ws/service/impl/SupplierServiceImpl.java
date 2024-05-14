@@ -53,4 +53,20 @@ public class SupplierServiceImpl implements SupplierService {
                 .toList();
         return util.createResponse(response, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<BaseApiResponse> editEnable(String publicId, boolean newEnable) {
+        SupplierEntity supplierEntity =supplierRepository.findByPublicId(publicId).orElseThrow(() ->
+                new SystemServiceException(ExceptionMessages.NO_RECORD_FOUND.getMessage(), HttpStatus.NOT_FOUND)
+        );
+        supplierEntity.setEnable(newEnable);
+        SupplierEntity savedSupplier;
+        try {
+            savedSupplier = supplierRepository.save(supplierEntity);
+            SupplierDto savedSupplierDto = util.convert(savedSupplier);
+            return util.createResponse(util.convert(savedSupplierDto, SupplierResponse.class), HttpStatus.OK);
+        }catch (Exception exception) {
+            throw new SystemServiceException(ExceptionMessages.DATABASE_IO_EXCEPTION.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

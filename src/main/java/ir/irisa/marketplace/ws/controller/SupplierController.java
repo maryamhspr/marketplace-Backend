@@ -68,4 +68,28 @@ public class SupplierController {
         return supplierService.getAllSupplier();
     }
 
+
+    @PutMapping("/edit-enable/{publicId}")
+    @Operation(summary = "Edit enable of a supplier")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Return an edited supplier",
+                    content = {@Content(mediaType = "application/json"), @Content(mediaType = "application/xml")}
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Supplier public id not found",
+                    content = {@Content(mediaType = "application/json"), @Content(mediaType = "application/xml")}
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "System Default Exception (SDE), or when database IO exception occurred",
+                    content = {@Content(mediaType = "application/json"), @Content(mediaType = "application/xml")}
+            )
+    })
+    public ResponseEntity<BaseApiResponse> editEnable(@PathVariable String publicId, @RequestBody boolean newEnable){
+        return supplierService.editEnable(publicId, newEnable);
+    }
+
 }

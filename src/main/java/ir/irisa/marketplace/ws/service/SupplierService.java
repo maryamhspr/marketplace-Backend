@@ -8,4 +8,6 @@ public interface SupplierService {
     ResponseEntity<BaseApiResponse> createASupplier(SupplierRequest supplierRequest);
 
     ResponseEntity<BaseApiResponse> getAllSupplier();
+
+    ResponseEntity<BaseApiResponse> editEnable(String publicId, boolean newEnable);
 }
